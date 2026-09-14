@@ -9,6 +9,11 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
+# Make the ls command display better
+ls() {
+  CLICOLOR_FORCE=1 command ls -C -G "$@" | sed -E 's/[[:space:]]+/&    /g'
+}
+
 # If we are in git repo, find the current branch name
 git_branch() {
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
